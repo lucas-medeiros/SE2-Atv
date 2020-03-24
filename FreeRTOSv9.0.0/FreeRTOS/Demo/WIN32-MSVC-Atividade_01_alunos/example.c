@@ -11,6 +11,7 @@
 // Esta será a sua máquina de estados
 StateMachine smBlink;
 
+/*
 // TODO: defina aqui as assinaturas dos estados da máquina de estados
 	STATE(...);
 	STATE(...);
@@ -23,6 +24,8 @@ StateMachine smBlink;
 	STATE(...) {
 		// TODO: adicione aqui o código de um dos estados
 	}
+
+	*/
 
 // TODO: implemente aqui os codigos das Tasks
 void task_BlinkLeft(void *pParam) {
@@ -43,6 +46,8 @@ int main_(void)
 {
 	// TODO: adicione aqui o código que executa ao iniciar
 	InitHAL();
+	printf("Iniciado loop\n");
+	xTaskCreate(task_Key, "Task Key", 1000, NULL, 1, NULL);
 	return 0;
 }
 

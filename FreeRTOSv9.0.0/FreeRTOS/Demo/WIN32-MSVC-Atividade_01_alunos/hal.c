@@ -17,9 +17,10 @@ tuCommand lastCommand;			// Armazena o estado atual dos sinalizadores. Veja tamb
 
 // Esta é a task que recebe os comandos do teclado e atualiza o valor de lastCommand
 void task_Key(void *pParam){
-	char key;
+	char key = ' ';
 	while (1) {
-		getch(key);
+		key = getch();
+		//scanf("%c", &key); fflush(stdin);
 		switch (key) {
 			case 'l':
 				lastCommand.TurnCommands = command_Left;
@@ -37,6 +38,7 @@ void task_Key(void *pParam){
 				printf("Char inválido\n");
 				break;
 		}
+		printf("Letra lida: %c\n", key);
 	}
 }
 
@@ -78,5 +80,5 @@ void ToggleTurnSignalLeft() {
 
 //Fazer um método show() pra mostrar na tela quando piscar (valor das variáveis)
 void Show() {
-	printf("Pisca esquerdo: %d | Pisca direito: %d", pinTurnSignal_LEFT, pinTurnSignal_RIGHT);
+	printf("Pisca esquerdo: %d | Pisca direito: %d\r", pinTurnSignal_LEFT, pinTurnSignal_RIGHT);
 }

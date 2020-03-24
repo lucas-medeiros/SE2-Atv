@@ -21,6 +21,9 @@ typedef struct {
 		uint8 Alert : 1;
 } tuCommand;
 
+// Esta é a task que recebe os comandos do teclado e atualiza o valor de lastCommand
+void task_Key(void* pParam);
+
 // Inicializa a Camada de Abstracao de Hardware.
 void InitHAL();
 

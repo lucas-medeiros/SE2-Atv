@@ -1,0 +1,31 @@
+﻿cl : linha de comando warning D9035: opção 'Gm' foi preterida e será removida em uma versão futura
+  Run-time-stats-utils.c
+  tasks.c
+  queue.c
+  port.c
+  list.c
+  main.c
+  hal.c
+C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\hal.h(20,37): warning C4214: extensão não padrão usada: tipos de campo de bits diferentes de int
+C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\hal.h(21,18): warning C4214: extensão não padrão usada: tipos de campo de bits diferentes de int
+C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\hal.c(22,16): warning C4244: '=': conversão de 'int' para 'char', possível perda de dados
+C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\hal.c(22,9): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\hal.c(19,21): warning C4100: 'pParam': parâmetro formal não referenciado
+  example.c
+C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\example.c(31,27): warning C4100: 'pParam': parâmetro formal não referenciado
+C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\example.c(36,28): warning C4100: 'pParam': parâmetro formal não referenciado
+C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\example.c(41,30): warning C4100: 'pParam': parâmetro formal não referenciado
+  basic_io.c
+  timers.c
+  heap_5.c
+C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Source\portable\MemMang\heap_5.c(344,6): warning C4146: operador menos unário aplicado a tipo unsigned, resultado permanece unsigned
+  event_groups.c
+  croutine.c
+  trcUser.c
+  trcKernelPort.c
+C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS-Plus\Source\FreeRTOS-Plus-Trace\trcKernelPort.c(121,74): warning C4305: '=': truncamento de 'int' para 'objectHandleType'
+  trcKernel.c
+  trcHardwarePort.c
+  trcBase.c
+  Gerando Código...
+LINK : fatal error LNK1104: não é possível abrir o arquivo '.\Debug\Atividade_01_alunos.exe'
