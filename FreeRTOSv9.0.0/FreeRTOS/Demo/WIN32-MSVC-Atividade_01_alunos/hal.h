@@ -49,4 +49,7 @@ void ToggleTurnSignalLeft();
 //Fazer um método show() pra mostrar na tela quando piscar (valor das variáveis)
 void Show();
 
+//Delay para piscar os sinais a uma frequência de 1,5Hz
+void Delay();
+
 #endif

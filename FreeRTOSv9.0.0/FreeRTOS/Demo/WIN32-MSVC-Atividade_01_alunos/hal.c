@@ -35,10 +35,10 @@ void task_Key(void *pParam){
 				lastCommand.Alert = !lastCommand.Alert;
 				break;
 			default:
-				printf("Char inválido\n");
+				printf("Char invalido\n");
 				break;
 		}
-		printf("Letra lida: %c\n", key);
+		//printf("Letra lida: %c\n", key);
 	}
 }
 
@@ -81,4 +81,9 @@ void ToggleTurnSignalLeft() {
 //Fazer um método show() pra mostrar na tela quando piscar (valor das variáveis)
 void Show() {
 	printf("Pisca esquerdo: %d | Pisca direito: %d\r", pinTurnSignal_LEFT, pinTurnSignal_RIGHT);
+}
+
+//Delay para piscar os sinais a uma frequência de 1,5Hz
+void Delay() {
+	Sleep(333);
 }
