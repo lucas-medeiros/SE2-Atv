@@ -28,8 +28,11 @@ tuCommand lastCommand;
 			NEXT_STATE(state_blinkAlert);
 		else if (lastCommand.TurnCommands == command_Left)
 			NEXT_STATE(state_blinkL);
+		else if (lastCommand.TurnCommands == command_Right)
+			NEXT_STATE(state_blinkR);
 		else if (lastCommand.TurnCommands == command_None)
 			NEXT_STATE(state_blinkNone);
+		
 	}
 
 	STATE(state_blinkL) {
@@ -37,10 +40,12 @@ tuCommand lastCommand;
 		lastCommand = getTurnCommand();
 		if (lastCommand.Alert == 1)
 			NEXT_STATE(state_blinkAlert);
-		else if (lastCommand.TurnCommands == command_None)
-			NEXT_STATE(state_blinkNone);
+		else if (lastCommand.TurnCommands == command_Left)
+			NEXT_STATE(state_blinkL);
 		else if (lastCommand.TurnCommands == command_Right)
 			NEXT_STATE(state_blinkR);
+		else if (lastCommand.TurnCommands == command_None)
+			NEXT_STATE(state_blinkNone);
 	}
 
 	STATE(state_blinkAlert) {
@@ -76,7 +81,8 @@ void task_BlinkLeft(void *pParam) {
 			ToggleTurnSignalLeft();
 			vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
 		}
-		
+		else
+			TurnSignalLeft(0);
 	}
 	
 }
@@ -88,6 +94,8 @@ void task_BlinkRight(void *pParam) {
 			ToggleTurnSignalRight();
 			vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
 		}
+		else
+			TurnSignalRight(0);
 	}
 }
 
@@ -103,17 +111,16 @@ void task_StateMachine(void *pParam) {
 int main_(void)
 {
 	// TODO: adicione aqui o código que executa ao iniciar
+	printf("Iniciando sistema\n\n");
+	printf("l - sinalizador para esquerda\nr - sinalizador para direita\na - liga/desliga pisca alerta\n<espaco> - desliga sinalizador\n\n");
+	Show();
 	InitHAL();
 	INIT(smBlink, state_blinkNone);
+	xTaskCreate(task_Key, "task_Key", 1000, NULL, 1, NULL);
 	xTaskCreate(task_BlinkLeft, "task_BlinkLeft", 1000, NULL, 1, NULL);
 	xTaskCreate(task_BlinkRight, "task_BlinkRight", 1000, NULL, 1, NULL);
 	xTaskCreate(task_StateMachine, "task_StateMachine", 1000, NULL, 1, NULL);
 	vTaskStartScheduler();
-	for (;;);
+	//for (;;);
 	return 0;
 }
-
-
-/* task_SM = pega last command e transicina os estados da SM -> NEXT_STATE 
-	blink a 1,5Hz (sleep 333); */
-

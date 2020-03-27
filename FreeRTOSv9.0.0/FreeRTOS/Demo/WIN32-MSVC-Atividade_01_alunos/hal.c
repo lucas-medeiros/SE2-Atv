@@ -34,10 +34,8 @@ void task_Key(void *pParam){
 				lastCommand.Alert = !lastCommand.Alert;
 				break;
 			default:
-				printf("Char invalido\n");
 				break;
 		}
-		//printf("Letra lida: %c\n", key);
 	}
 }
 
