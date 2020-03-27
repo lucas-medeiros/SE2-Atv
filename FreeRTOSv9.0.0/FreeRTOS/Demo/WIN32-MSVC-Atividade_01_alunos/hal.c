@@ -20,7 +20,6 @@ void task_Key(void *pParam){
 	char key = ' ';
 	while (1) {
 		key = getch();
-		//scanf("%c", &key); fflush(stdin);
 		switch (key) {
 			case 'l':
 				lastCommand.TurnCommands = command_Left;
@@ -59,6 +58,7 @@ tuCommand getTurnCommand() {
 */
 void TurnSignalRight(boolean s) {
 	pinTurnSignal_RIGHT = s;
+	Show();
 }
 
 /* Liga ou desliga o sinalizador esquerdo.
@@ -66,24 +66,22 @@ void TurnSignalRight(boolean s) {
 */
 void TurnSignalLeft(boolean s) {
 	pinTurnSignal_LEFT = s;
+	Show();
 }
 
 // Inverte o estado do sinalizador direito. Se estava apagado, acende. Se estava aceso, apaga.
 void ToggleTurnSignalRight() {
 	pinTurnSignal_RIGHT = !pinTurnSignal_RIGHT;
+	Show();
 }
 
 // Inverte o estado do sinalizador direito. Se estava apagado, acende. Se estava aceso, apaga.
 void ToggleTurnSignalLeft() {
 	pinTurnSignal_LEFT = !pinTurnSignal_LEFT;
+	Show();
 }
 
 //Fazer um método show() pra mostrar na tela quando piscar (valor das variáveis)
 void Show() {
 	printf("Pisca esquerdo: %d | Pisca direito: %d\r", pinTurnSignal_LEFT, pinTurnSignal_RIGHT);
-}
-
-//Delay para piscar os sinais a uma frequência de 1,5Hz
-void Delay() {
-	Sleep(333);
 }
