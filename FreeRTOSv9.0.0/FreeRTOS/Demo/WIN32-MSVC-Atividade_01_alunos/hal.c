@@ -46,6 +46,7 @@ void InitHAL() {
 	pinTurnSignal_LEFT = 0;
 	pinTurnSignal_RIGHT = 0;
 }
+
 // Metodo que retorna o estado da  alavanca de comando dos sinalizadores ("alavanca das setas junto ao volante"). Ver também tuCommand
 tuCommand getTurnCommand() {
 	return lastCommand;

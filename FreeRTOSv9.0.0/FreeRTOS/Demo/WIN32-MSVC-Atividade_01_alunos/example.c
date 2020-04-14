@@ -28,11 +28,8 @@ tuCommand lastCommand;
 			NEXT_STATE(state_blinkAlert);
 		else if (lastCommand.TurnCommands == command_Left)
 			NEXT_STATE(state_blinkL);
-		else if (lastCommand.TurnCommands == command_Right)
-			NEXT_STATE(state_blinkR);
 		else if (lastCommand.TurnCommands == command_None)
 			NEXT_STATE(state_blinkNone);
-		
 	}
 
 	STATE(state_blinkL) {
@@ -40,8 +37,6 @@ tuCommand lastCommand;
 		lastCommand = getTurnCommand();
 		if (lastCommand.Alert == 1)
 			NEXT_STATE(state_blinkAlert);
-		else if (lastCommand.TurnCommands == command_Left)
-			NEXT_STATE(state_blinkL);
 		else if (lastCommand.TurnCommands == command_Right)
 			NEXT_STATE(state_blinkR);
 		else if (lastCommand.TurnCommands == command_None)
@@ -50,6 +45,7 @@ tuCommand lastCommand;
 
 	STATE(state_blinkAlert) {
 		// TODO: adicione aqui o código de um dos estados
+
 		lastCommand = getTurnCommand();
 		if (lastCommand.Alert == 0) {
 			if (lastCommand.TurnCommands == command_Left)
@@ -77,12 +73,22 @@ tuCommand lastCommand;
 void task_BlinkLeft(void *pParam) {
 	// TODO: adicione aqui o código da task
 	for (;;) {
-		if (COMPARE(smBlink, state_blinkL) == 1 || COMPARE(smBlink, state_blinkAlert) == 1) {
-			ToggleTurnSignalLeft();
-			vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
-		}
-		else
+		if (COMPARE(smBlink, state_blinkAlert) == 1) {
 			TurnSignalLeft(0);
+			vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
+			TurnSignalLeft(1);
+			vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
+		} 
+		else {
+			if (COMPARE(smBlink, state_blinkL) == 1) {
+				ToggleTurnSignalLeft();
+				vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
+			}
+			else {
+				TurnSignalLeft(0);
+				vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
+			}
+		}
 	}
 	
 }
@@ -90,12 +96,22 @@ void task_BlinkLeft(void *pParam) {
 void task_BlinkRight(void *pParam) {
 	// TODO: adicione aqui o código da task
 	for (;;) {
-		if (COMPARE(smBlink, state_blinkR) == 1 || COMPARE(smBlink, state_blinkAlert) == 1) {
-			ToggleTurnSignalRight();
+		if (COMPARE(smBlink, state_blinkAlert) == 1) {
+			TurnSignalRight(0);
+			vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
+			TurnSignalRight(1);
 			vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
 		}
-		else
-			TurnSignalRight(0);
+		else {
+			if (COMPARE(smBlink, state_blinkR) == 1) {
+				ToggleTurnSignalRight();
+				vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
+			}
+			else {
+				TurnSignalRight(0);
+				vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
+			}
+		}
 	}
 }
 
