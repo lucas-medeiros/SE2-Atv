@@ -132,7 +132,7 @@ int main_(void)
 	Show();
 	InitHAL();
 	INIT(smBlink, state_blinkNone);
-	xTaskCreate(task_Key, "task_Key", 1000, NULL, 1, NULL);
+	
 	xTaskCreate(task_BlinkLeft, "task_BlinkLeft", 1000, NULL, 1, NULL);
 	xTaskCreate(task_BlinkRight, "task_BlinkRight", 1000, NULL, 1, NULL);
 	xTaskCreate(task_StateMachine, "task_StateMachine", 1000, NULL, 1, NULL);

@@ -45,6 +45,7 @@ void InitHAL() {
 	lastCommand.Alert = 0;
 	pinTurnSignal_LEFT = 0;
 	pinTurnSignal_RIGHT = 0;
+	xTaskCreate(task_Key, "task_Key", 1000, NULL, 1, NULL);
 }
 
 // Metodo que retorna o estado da  alavanca de comando dos sinalizadores ("alavanca das setas junto ao volante"). Ver também tuCommand
