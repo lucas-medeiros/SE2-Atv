@@ -15,7 +15,7 @@ boolean pinTurnSignal_LEFT;		// Representa o estado do pino de saida do microcon
 boolean pinTurnSignal_RIGHT;	// Representa o estado do pino de saida do microcontrolador ligado ao sinalizador DIREITO
 tuCommand lastCommand;			// Armazena o estado atual dos sinalizadores. Veja tambem: tuCommand
 
-// Esta é a task que recebe os comandos do teclado e atualiza o valor de lastCommand
+// Esta ï¿½ a task que recebe os comandos do teclado e atualiza o valor de lastCommand
 void task_Key(void *pParam){
 	char key = ' ';
 	while (1) {
@@ -36,6 +36,7 @@ void task_Key(void *pParam){
 			default:
 				break;
 		}
+		vTaskDelay(portTICK_RATE_MS); //delay de 1ms?
 	}
 }
 
@@ -48,7 +49,7 @@ void InitHAL() {
 	xTaskCreate(task_Key, "task_Key", 1000, NULL, 1, NULL);
 }
 
-// Metodo que retorna o estado da  alavanca de comando dos sinalizadores ("alavanca das setas junto ao volante"). Ver também tuCommand
+// Metodo que retorna o estado da  alavanca de comando dos sinalizadores ("alavanca das setas junto ao volante"). Ver tambï¿½m tuCommand
 tuCommand getTurnCommand() {
 	return lastCommand;
 }
@@ -81,7 +82,7 @@ void ToggleTurnSignalLeft() {
 	Show();
 }
 
-//Fazer um método show() pra mostrar na tela quando piscar (valor das variáveis)
+//Fazer um mï¿½todo show() pra mostrar na tela quando piscar (valor das variï¿½veis)
 void Show() {
 	printf("Pisca esquerdo: %d | Pisca direito: %d\r", pinTurnSignal_LEFT, pinTurnSignal_RIGHT);
 }
