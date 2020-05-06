@@ -19,7 +19,7 @@ tuCommand lastCommand;			// Armazena o estado atual dos sinalizadores. Veja tamb
 void task_Key(void *pParam){
 	char key = ' ';
 	while (1) {
-		key = getch();
+		key = _getch();
 		switch (key) {
 			case 'l':
 				lastCommand.TurnCommands = command_Left;
@@ -36,7 +36,7 @@ void task_Key(void *pParam){
 			default:
 				break;
 		}
-		vTaskDelay(portTICK_RATE_MS); //delay de 1ms?
+		vTaskDelay(5/portTICK_RATE_MS); //delay de 5ms?
 	}
 }
 

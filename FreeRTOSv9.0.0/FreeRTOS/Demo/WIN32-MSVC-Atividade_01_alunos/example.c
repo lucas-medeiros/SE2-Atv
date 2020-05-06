@@ -11,10 +11,20 @@
 // Esta será a sua máquina de estados
 StateMachine smBlink;
 
+//Input de comando
 tuCommand lastCommand;
 
+//Handle para deletar tasks
+xTaskHandle handleLeft;
+xTaskHandle handleRight;
 
-// TODO: defina aqui as assinaturas dos estados da máquina de estados
+//Protótipo das funções
+void task_BlinkLeft(void* pParam);
+void task_BlinkRight(void* pParam);
+void stopSignal(void);
+
+
+// Assinaturas dos estados da máquina de estados
 	STATE(state_blinkR);
 	STATE(state_blinkL);
 	STATE(state_blinkAlert);
@@ -22,32 +32,55 @@ tuCommand lastCommand;
 
 // TODO: crie aqui o código dos estados da máquina de estados
 	STATE(state_blinkR) {
-		// TODO: adicione aqui o código de um dos estados
 		lastCommand = getTurnCommand();
-		if (lastCommand.Alert == 1)
+		if (FIRST) {
+			stopSignal();
+			xTaskCreate(task_BlinkRight, "task_BlinkRight", 1000, NULL, 2, &handleRight);
+		}
+		if (lastCommand.Alert == 1) {
 			NEXT_STATE(state_blinkAlert);
-		else if (lastCommand.TurnCommands == command_Left)
+			vTaskDelete(handleRight);
+		}
+		else if (lastCommand.TurnCommands == command_Left) {
 			NEXT_STATE(state_blinkL);
-		else if (lastCommand.TurnCommands == command_None)
+			vTaskDelete(handleRight);
+		}
+		else if (lastCommand.TurnCommands == command_None) {
 			NEXT_STATE(state_blinkNone);
+			vTaskDelete(handleRight);
+		}
 	}
 
 	STATE(state_blinkL) {
-		// TODO: adicione aqui o código de um dos estados
 		lastCommand = getTurnCommand();
-		if (lastCommand.Alert == 1)
+		if (FIRST) {
+			stopSignal();
+			xTaskCreate(task_BlinkLeft, "task_BlinkLeft", 1000, NULL, 2, &handleLeft);
+		}
+		if (lastCommand.Alert == 1) {
 			NEXT_STATE(state_blinkAlert);
-		else if (lastCommand.TurnCommands == command_Right)
+			vTaskDelete(handleLeft);
+		} 
+		else if (lastCommand.TurnCommands == command_Right) {
 			NEXT_STATE(state_blinkR);
-		else if (lastCommand.TurnCommands == command_None)
+			vTaskDelete(handleLeft);
+		}
+		else if (lastCommand.TurnCommands == command_None) {
 			NEXT_STATE(state_blinkNone);
+			vTaskDelete(handleLeft);
+		}
 	}
 
 	STATE(state_blinkAlert) {
-		// TODO: adicione aqui o código de um dos estados
-
+		if (FIRST) {
+			stopSignal();
+			xTaskCreate(task_BlinkRight, "task_BlinkRight", 1000, NULL, 2, &handleRight);
+			xTaskCreate(task_BlinkLeft, "task_BlinkLeft", 1000, NULL, 2, &handleLeft);
+		}
 		lastCommand = getTurnCommand();
 		if (lastCommand.Alert == 0) {
+			vTaskDelete(handleRight);
+			vTaskDelete(handleLeft);
 			if (lastCommand.TurnCommands == command_Left)
 				NEXT_STATE(state_blinkL);
 			else if (lastCommand.TurnCommands == command_Right)
@@ -60,6 +93,9 @@ tuCommand lastCommand;
 	STATE(state_blinkNone) {
 		// TODO: adicione aqui o código de um dos estados
 		lastCommand = getTurnCommand();
+		if (FIRST) {
+			stopSignal();
+		}
 		if (lastCommand.Alert == 1)
 			NEXT_STATE(state_blinkAlert);
 		else if (lastCommand.TurnCommands == command_Left)
@@ -71,71 +107,39 @@ tuCommand lastCommand;
 
 // TODO: implemente aqui os codigos das Tasks
 void task_BlinkLeft(void *pParam) {
-	// TODO: adicione aqui o código da task
 	for (;;) {
-		if (COMPARE(smBlink, state_blinkAlert) == 1) {
-			TurnSignalLeft(0);
-			vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
-			TurnSignalLeft(1);
-			vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
-		} 
-		else {
-			if (COMPARE(smBlink, state_blinkL) == 1) {
-				ToggleTurnSignalLeft();
-				vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
-			}
-			else {
-				TurnSignalLeft(0);
-				vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
-			}
-		}
+		ToggleTurnSignalLeft();
+		vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
 	}
 	
 }
 
+
 void task_BlinkRight(void *pParam) {
-	// TODO: adicione aqui o código da task
 	for (;;) {
-		if (COMPARE(smBlink, state_blinkAlert) == 1) {
-			TurnSignalRight(0);
-			vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
-			TurnSignalRight(1);
-			vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
-		}
-		else {
-			if (COMPARE(smBlink, state_blinkR) == 1) {
-				ToggleTurnSignalRight();
-				vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
-			}
-			else {
-				TurnSignalRight(0);
-				vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
-			}
-		}
+		ToggleTurnSignalRight();
+		vTaskDelay(333 / portTICK_RATE_MS); //delay pra piscar a 1,5Hz
 	}
 }
 
-void task_StateMachine(void *pParam) {
-	// TODO: adicione aqui o código da task que executa a máquina de estados
-	for (;;) {
-		//executa a maquina de estados
-		EXEC(smBlink);
 
-	}
+void stopSignal(void) { //função para parar os sinalizadores
+	TurnSignalLeft(0);
+	TurnSignalRight(0);
 }
 
-int main_(void)
-{
-	// TODO: adicione aqui o código que executa ao iniciar
+
+void vApplicationIdleHook(void) {
+	EXEC(smBlink);
+}
+
+
+int main_(void) {
 	printf("Iniciando sistema\n\n");
 	printf("l - sinalizador para esquerda\nr - sinalizador para direita\na - liga/desliga pisca alerta\n<espaco> - desliga sinalizador\n\n");
 	Show();
 	InitHAL();
 	INIT(smBlink, state_blinkNone);
-	
-	xTaskCreate(task_BlinkLeft, "task_BlinkLeft", 1000, NULL, 1, NULL);
-	xTaskCreate(task_BlinkRight, "task_BlinkRight", 1000, NULL, 1, NULL);
-	xTaskCreate(task_StateMachine, "task_StateMachine", 1000, NULL, 1, NULL);
 	vTaskStartScheduler();
 	//for (;;);
 	return 0;
