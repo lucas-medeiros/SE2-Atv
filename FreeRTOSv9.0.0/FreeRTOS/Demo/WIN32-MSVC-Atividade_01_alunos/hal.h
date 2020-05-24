@@ -19,6 +19,8 @@ typedef enum {
 typedef struct {
 		tdTurningCommands TurnCommands : 3;
 		uint8 Alert : 1;
+		uint8 Break : 1;
+		uint8 Ignition : 1;
 } tuCommand;
 
 // Esta é a task que recebe os comandos do teclado e atualiza o valor de lastCommand
@@ -45,6 +47,14 @@ void ToggleTurnSignalRight();
 
 // Inverte o estado do sinalizador esquerdo. Se estava apagado, acende. Se estava aceso, apaga.
 void ToggleTurnSignalLeft();
+
+// Inverte o estado da luz de freio. Se estava apagada, acende. Se estava acesa, apaga.
+void ToggleBreak();
+
+/* Liga ou desliga a luz de freio.
+- s: estado do sinalizador (TRUE = acende / FALSE = apaga)
+*/
+void TurnSignalBreak(boolean s);
 
 //Fazer um método show() pra mostrar na tela quando piscar (valor das variáveis)
 void Show();

@@ -172,7 +172,7 @@ void vApplicationMallocFailedHook( void )
 /*-----------------------------------------------------------*/
 
 
-//void vApplicationIdleHook( void ) {
+void vApplicationIdleHook( void ) {
 	/* vApplicationIdleHook() will only be called if configUSE_IDLE_HOOK is set
 	to 1 in FreeRTOSConfig.h.  It will be called on each iteration of the idle
 	task.  It is essential that code added to this hook function never attempts
@@ -197,7 +197,7 @@ void vApplicationMallocFailedHook( void )
 			}
 		}
 	*/
-// } 
+} 
 
 /*-----------------------------------------------------------*/
 
