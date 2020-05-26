@@ -1,11 +1,4 @@
 ﻿cl : linha de comando warning D9035: opção 'Gm' foi preterida e será removida em uma versão futura
-  hal.c
-C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\hal.h(20,37): warning C4214: extensão não padrão usada: tipos de campo de bits diferentes de int
-C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\hal.h(21,18): warning C4214: extensão não padrão usada: tipos de campo de bits diferentes de int
-C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\hal.h(22,18): warning C4214: extensão não padrão usada: tipos de campo de bits diferentes de int
-C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\hal.h(23,21): warning C4214: extensão não padrão usada: tipos de campo de bits diferentes de int
-C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\hal.c(30,17): warning C4244: '=': conversão de 'int' para 'char', possível perda de dados
-C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\hal.c(27,21): warning C4100: 'pParam': parâmetro formal não referenciado
   example.c
 C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\example.c(43,74): warning C4152: extensão não padrão, conversão de ponteiro de função/dados em expressão
 C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\example.c(64,72): warning C4152: extensão não padrão, conversão de ponteiro de função/dados em expressão
@@ -14,5 +7,4 @@ C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC
 C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\example.c(120,19): warning C4152: extensão não padrão, conversão de ponteiro de função/dados em expressão
 C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\example.c(128,23): warning C4100: 'pParam': parâmetro formal não referenciado
 C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\example.c(143,30): warning C4100: 'pParam': parâmetro formal não referenciado
-  Gerando Código...
   WIN32.vcxproj -> C:\Users\Pichau\Documents\GitHub\SE2-Atv\FreeRTOSv9.0.0\FreeRTOS\Demo\WIN32-MSVC-Atividade_01_alunos\.\Debug\Atividade_01_alunos.exe

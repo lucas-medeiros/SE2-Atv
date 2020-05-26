@@ -47,11 +47,11 @@ void stopSignal(void);
 			NEXT_STATE(state_blinkAlert);
 			vTaskDelete(handleRight);
 		}
-		else if (lastCommand.TurnCommands == command_Left && lastCommand.Ignition) {
+		else if ((lastCommand.TurnCommands == command_Left)) {
 			NEXT_STATE(state_blinkL);
 			vTaskDelete(handleRight);
 		}
-		else if (lastCommand.TurnCommands == command_None || !lastCommand.Ignition) {
+		else if ((lastCommand.TurnCommands == command_None) || (lastCommand.Ignition != 1)) {
 			NEXT_STATE(state_blinkNone);
 			vTaskDelete(handleRight);
 		}
@@ -68,11 +68,11 @@ void stopSignal(void);
 			NEXT_STATE(state_blinkAlert);
 			vTaskDelete(handleLeft);
 		}
-		else if (lastCommand.TurnCommands == command_Right && lastCommand.Ignition) {
+		else if ((lastCommand.TurnCommands == command_Right)) {
 			NEXT_STATE(state_blinkR);
 			vTaskDelete(handleLeft);
 		}
-		else if (lastCommand.TurnCommands == command_None || !lastCommand.Ignition) {
+		else if ((lastCommand.TurnCommands == command_None) || (lastCommand.Ignition != 1)) {
 			NEXT_STATE(state_blinkNone);
 			vTaskDelete(handleLeft);
 		}
@@ -89,11 +89,11 @@ void stopSignal(void);
 		if (lastCommand.Alert == 0) {
 			vTaskDelete(handleRight);
 			vTaskDelete(handleLeft);
-			if (lastCommand.TurnCommands == command_Left && lastCommand.Ignition)
+			if ((lastCommand.TurnCommands == command_Left) && (lastCommand.Ignition == 1))
 				NEXT_STATE(state_blinkL);
-			else if (lastCommand.TurnCommands == command_Right && lastCommand.Ignition)
+			else if ((lastCommand.TurnCommands == command_Right) && (lastCommand.Ignition == 1))
 				NEXT_STATE(state_blinkR);
-			else if (lastCommand.TurnCommands == command_None)
+			else
 				NEXT_STATE(state_blinkNone);
 		}
 	}
@@ -107,9 +107,9 @@ void stopSignal(void);
 		xQueueReceive(queueCommands, &lastCommand, portMAX_DELAY);
 		if (lastCommand.Alert == 1)
 			NEXT_STATE(state_blinkAlert);
-		else if (lastCommand.TurnCommands == command_Left && lastCommand.Ignition)
+		else if ((lastCommand.TurnCommands == command_Left) && (lastCommand.Ignition == 1))
 			NEXT_STATE(state_blinkL);
-		else if (lastCommand.TurnCommands == command_Right && lastCommand.Ignition)
+		else if ((lastCommand.TurnCommands == command_Right) && (lastCommand.Ignition == 1))
 			NEXT_STATE(state_blinkR);
 	}
 

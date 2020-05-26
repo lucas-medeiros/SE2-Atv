@@ -27,7 +27,7 @@ extern xQueueHandle queueBreak;
 void task_Key(void *pParam){
 	char key = ' ';
 	while (1) {
-		key = _getch();
+		key = getch();
 		switch (key) {
 			case 'l':
 				lastCommand.TurnCommands = command_Left;
@@ -43,7 +43,7 @@ void task_Key(void *pParam){
 				break;
 			case 'b':
 				lastCommand.Break = !lastCommand.Break;
-				pinBreak = lastCommand.Break;
+				pinBreak = !pinBreak;
 				xQueueSendToBack(queueBreak, &pinBreak, 0);
 				break;
 			case 'i':
